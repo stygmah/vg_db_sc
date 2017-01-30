@@ -2,6 +2,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const path = require('path');
 //Other Const
 const requestAPI = require('./requestAPI/requestAPI');
 const port = process.env.PORT || 3000;
@@ -13,7 +14,7 @@ const port = process.env.PORT || 3000;
 var app = express();
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
-
+app.use("/public", express.static(path.join(__dirname, 'public')));
 
 /*Helpers*/
 hbs.registerHelper('getCurrentYear',()=>{
@@ -33,8 +34,7 @@ app.use((req,res,next)=>{
 
 
 /*Load home view*
-*               *
-*               *
+
 *****************/
 app.get('/', (req, res) => {
   res.render('home.hbs',{
@@ -43,8 +43,7 @@ app.get('/', (req, res) => {
 });
 
 /*Load game view*
-*               *
-*               *
+
 ****************/
 app.get('/gameView', (req, res) => {
   requestAPI.requestGame(req.query.id, (val)=>{
@@ -60,13 +59,11 @@ app.get('/gameView', (req, res) => {
 });
 
 /*Game not found view*
-*                    *
-*                    *
+
 **********************/
 
 /*Bad request view*
-*                 *
-*                 *
+
 *******************/
 app.get('/badRequest', (req, res) => {
   res.send({
