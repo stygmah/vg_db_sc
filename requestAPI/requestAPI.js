@@ -1,7 +1,7 @@
 const http = require('http');
 const unirest = require('unirest');
 const fs = require('fs');
-const mashapeKey = "7trttflEhpmshdEHi1QDgdONAh7Jp1vZAHWjsnCV3jloxiWLIk";
+const mashapeKey = "";
 
 const imageTemp = "https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/";
 
